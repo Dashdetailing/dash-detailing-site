@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dash Detailing — Mobile Auto Detailing in Treasure Valley</title>
+  <meta name="description" content="Dash Detailing provides premium mobile car detailing across the Treasure Valley. Full details, interiors, exteriors, paint correction, and ceramic coatings. Book online." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --bg:#1e1e1e;         /* dark gray from logo vibe */
+      --panel:#22262c;      /* card gray */
+      --muted:#aab4c0;      /* light gray text */
+      --text:#e6edf5;       /* near white */
+      --accent:#5BC0F8;     /* blue from logo */
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:1rem;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.75rem 1.1rem;border-radius:.9rem;font-weight:700}
+    .btn-primary{background:var(--accent);color:#0b1220}
+    .btn-ghost{border:1px solid rgba(255,255,255,.12);color:var(--text)}
+    .muted{color:var(--muted)}
+    .link{color:var(--accent)}
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:50}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:90vw;max-height:85vh;border-radius:1rem}
+  </style>
+  <script>
+    // Site config (edit these for quick changes)
+    const SITE = {
+      name: "Dash Detailing",
+      area: "Treasure Valley, Idaho",
+      phone: "(562) 201-2731",
+      email: "Info@dashmobiledetailer.com",
+      calendly: "https://calendly.com/dashdetailing",
+      instagram: "https://www.instagram.com/dashsdetailing/",
+      youtube: "https://www.youtube.com/@Dash-detailing",
+      facebook: "https://www.facebook.com/profile.php?id=61579169787822",
+      mapQuery: "Wilder, Idaho",
+      services: [
+        {name:"Full Detail (In & Out)", price:250, desc:"Interior restoration + exterior decon & protection. Most popular."},
+        {name:"Interior Only", price:150, desc:"Vacuum, steam & extract as needed. Plastics/leather reconditioned."},
+        {name:"Exterior Only", price:150, desc:"Foam bath, safe hand wash, clay, premium sealant."},
+        {name:"Maintenance Detail", price:100, desc:"For returning clients. Interior tidy + exterior refresh."},
+        {name:"Paint Correction", price:500, desc:"Machine polishing to remove defects and restore gloss."},
+        {name:"Ceramic Coating", price:600, desc:"Long‑lasting protection and shine."},
+        {name:"Correction + Ceramic", price:1100, desc:"Best value: correction prep + multi‑year protection."}
+      ],
+      gallery:[
+        // Save your images in the same folder as this file and match these names
+        "gallery-before-after-wheels.jpg",
+        "gallery-foam-corvette.jpg",
+        "gallery-jeep-rubicon.jpg",
+        "gallery-truck-wash.jpg",
+        "gallery-white-chevy.jpg",
+        "gallery-red-vette-wheel.jpg",
+        "gallery-polishing-glass.jpg",
+        "gallery-corvette-interior.jpg",
+        "gallery-jeep-foam.jpg",
+        "gallery-interior-cleaning.jpg"
+      ]
+    }
+  </script>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="sticky top-0 z-40 border-b border-white/10 backdrop-blur bg-[#1e1e1e]/90">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-2xl" style="background:var(--accent)"></div>
+        <span class="font-extrabold text-xl">Dash Detailing</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 font-semibold">
+        <a class="link" href="#services">Services</a>
+        <a class="link" href="#pricing">Pricing</a>
+        <a class="link" href="#gallery">Gallery</a>
+        <a class="link" href="#faq">FAQ</a>
+        <a class="btn btn-primary" href="#book">Book Now</a>
+      </nav>
+      <button id="menuBtn" class="md:hidden btn btn-ghost">Menu</button>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 grid gap-2 text-lg">
+        <a class="link" href="#services">Services</a>
+        <a class="link" href="#pricing">Pricing</a>
+        <a class="link" href="#gallery">Gallery</a>
+        <a class="link" href="#faq">FAQ</a>
+        <a class="btn btn-primary w-max" href="#book">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+          Luxury Mobile Detailing
+          <span class="block" style="color:var(--accent)">Right at Your Door</span>
+        </h1>
+        <p class="mt-5 text-lg muted">Serving the <strong>Treasure Valley</strong>. We restore interiors, perfect paint, and protect finishes with pro‑grade products.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a class="btn btn-primary" href="#book">Book Online</a>
+          <a class="btn btn-ghost" href="tel:+15622012731">Call (562) 201‑2731</a>
+        </div>
+        <p class="mt-3 text-sm muted">Questions? <a class="link" href="mailto:Info@dashmobiledetailer.com">Info@dashmobiledetailer.com</a></p>
+      </div>
+      <div class="card p-4">
+        <div class="aspect-[16/10] rounded-xl bg-[url('hero-fallback.jpg')] bg-center bg-cover"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="py-6 border-y border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-3 gap-4 text-center">
+      <div class="card p-4"><div class="text-xl font-bold" style="color:var(--accent)">Fully Mobile</div><div class="muted">Home or workplace service</div></div>
+      <div class="card p-4"><div class="text-xl font-bold" style="color:var(--accent)">Transparent Pricing</div><div class="muted">No surprises, size‑based</div></div>
+      <div class="card p-4"><div class="text-xl font-bold" style="color:var(--accent)">Quality Guarantee</div><div class="muted">If we miss it, we fix it</div></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between">
+        <h2 class="text-3xl font-extrabold">Services</h2>
+        <a class="btn btn-primary hidden sm:inline-flex" href="#book">Book</a>
+      </div>
+      <p class="mt-3 muted">Interior • Exterior • Paint Correction • Ceramic Coatings • Maintenance</p>
+      <div id="servicesGrid" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+      <!-- Full Detail breakdown -->
+      <div class="mt-10 card p-6">
+        <h3 class="text-2xl font-bold">What our <span style="color:var(--accent)">Full Detail</span> includes</h3>
+        <div class="mt-6 grid md:grid-cols-2 gap-8">
+          <div>
+            <div class="font-semibold">Interior 🪟🧼</div>
+            <ul class="mt-2 list-disc pl-5 muted space-y-1">
+              <li>Trash removal & Tornador blowout of cracks/vents</li>
+              <li>Full vacuum (under/between seats, trunk/cargo)</li>
+              <li>Shampoo + steam extraction for carpets, mats, seats</li>
+              <li>Leather/vinyl and plastics deep‑cleaned & conditioned</li>
+              <li>Interior glass streak‑free</li>
+            </ul>
+          </div>
+          <div>
+            <div class="font-semibold">Exterior 🚗✨</div>
+            <ul class="mt-2 list-disc pl-5 muted space-y-1">
+              <li>Wheels, tires & wheel wells deep‑cleaned</li>
+              <li>Bug removal & degreasing of lower panels</li>
+              <li>Foam bath + safe hand wash</li>
+              <li>Clay bar decontamination</li>
+              <li>Premium sealant (≈6–12 months) + exterior glass & tire dressing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="py-16 border-y border-white/10 bg-[#191c20]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold">Pricing</h2>
+      <p class="mt-2 muted">Starting prices shown. Final quote varies by size & condition.</p>
+      <div id="pricingGrid" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+      <!-- Upcharge tables -->
+      <div class="mt-10 grid lg:grid-cols-2 gap-6">
+        <div class="card p-6 overflow-x-auto">
+          <h3 class="text-xl font-bold">Vehicle Size Upcharge — Full / Correction / Ceramic</h3>
+          <table class="mt-4 w-full text-left text-sm">
+            <thead class="muted">
+              <tr><th class="py-2 pr-4">Size</th><th class="py-2 pr-4">Examples</th><th class="py-2">Upcharge</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="py-2 pr-4">Small Car</td><td class="py-2 pr-4">Civic, Corolla, Mazda 3</td><td class="py-2">$0</td></tr>
+              <tr><td class="py-2 pr-4">Midsize SUV / Small Truck</td><td class="py-2 pr-4">RAV4, Escape, Colorado</td><td class="py-2">+$25</td></tr>
+              <tr><td class="py-2 pr-4">Large SUV / Full‑Size Truck</td><td class="py-2 pr-4">Tahoe, F‑150, Tundra</td><td class="py-2">+$50</td></tr>
+              <tr><td class="py-2 pr-4">XL SUV / Van</td><td class="py-2 pr-4">Suburban, Expedition, Sprinter</td><td class="py-2">+$75</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card p-6 overflow-x-auto">
+          <h3 class="text-xl font-bold">Maintenance Detail — Size Upcharge</h3>
+          <table class="mt-4 w-full text-left text-sm">
+            <thead class="muted">
+              <tr><th class="py-2 pr-4">Size</th><th class="py-2 pr-4">Examples</th><th class="py-2">Upcharge</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="py-2 pr-4">Small Car</td><td class="py-2 pr-4">Civic, Corolla, Mazda 3</td><td class="py-2">$0</td></tr>
+              <tr><td class="py-2 pr-4">Midsize SUV / Small Truck</td><td class="py-2 pr-4">RAV4, Escape, Colorado</td><td class="py-2">+$15</td></tr>
+              <tr><td class="py-2 pr-4">Large SUV / Full‑Size Truck</td><td class="py-2 pr-4">Tahoe, F‑150, Tundra</td><td class="py-2">+$25</td></tr>
+              <tr><td class="py-2 pr-4">XL SUV / Van</td><td class="py-2 pr-4">Suburban, Expedition, Sprinter</td><td class="py-2">+$40</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Add-ons & Value -->
+      <div class="mt-10 grid lg:grid-cols-2 gap-6">
+        <div class="card p-6">
+          <h3 class="text-xl font-bold">Add‑Ons</h3>
+          <ul class="mt-3 grid gap-2">
+            <li>Headlight Restoration — <strong>$100</strong></li>
+            <li>Pet Hair Removal — <strong>$25</strong> light / <strong>$40</strong> moderate / <strong>$60+</strong> severe</li>
+            <li>Engine Bay Detail — <strong>$50</strong></li>
+            <li>Ozone Odor Treatment — <strong>$50</strong></li>
+            <li>Spot Paint Correction — <strong>$75</strong> per panel</li>
+            <li>Windshield Coating — <strong>$50</strong></li>
+            <li>Extra Dirty Fee — <strong>$50–$100</strong></li>
+            <li>Plastic Trim Restoration — <strong>$50</strong></li>
+          </ul>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-xl font-bold">Why our Full Detail is worth it</h3>
+          <p class="muted">🕒 4–5 hours of hands‑on work — not a quick clean.</p>
+          <div class="mt-3 text-sm muted">Dealership “detail”: $400–$600 • Cheap shop: $80–$150 • <span style="color:var(--accent)">Dash Detailing</span>: $250–$325 for full interior + exterior at your location.</div>
+          <div class="mt-3 text-sm muted">📍 Mobile convenience • 🔒 Quality guarantee — if we miss a spot, we fix it.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between">
+        <h2 class="text-3xl font-extrabold">Gallery</h2>
+        <a class="btn btn-primary hidden sm:inline-flex" href="#book">Get a Quote</a>
+      </div>
+      <p class="mt-2 muted">Tap any photo to enlarge.</p>
+      <div id="galleryGrid" class="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+    </div>
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+      <button id="lightboxClose" class="absolute top-6 right-6 text-3xl text-white">×</button>
+      <img id="lightboxImg" alt="Detail photo" />
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="book" class="py-16 border-y border-white/10 bg-[#191c20]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4 flex-wrap">
+        <h2 class="text-3xl font-extrabold">Book Your Detail</h2>
+        <div class="flex gap-2 text-sm">
+          <button id="btnInline" class="btn btn-ghost">Inline Form</button>
+          <button id="btnCalendly" class="btn btn-ghost">Calendly</button>
+        </div>
+      </div>
+      <p class="mt-2 muted">Pick the inline form or book directly with Calendly.</p>
+
+      <div id="calendarWrap" class="mt-8 hidden">
+        <div class="rounded-2xl overflow-hidden border border-white/10 card p-0">
+          <iframe id="calendarFrame" src="about:blank" class="w-full h-[70vh]" frameborder="0"></iframe>
+        </div>
+      </div>
+
+      <form id="quoteForm" name="quote" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="mt-8 grid gap-4 md:grid-cols-2 card p-6">
+        <input type="hidden" name="form-name" value="quote">
+        <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+        <div>
+          <label class="text-sm font-semibold">Name</label>
+          <input required name="name" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="Your name" />
+        </div>
+        <div>
+          <label class="text-sm font-semibold">Phone</label>
+          <input required name="phone" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="(562) 201-2731" />
+        </div>
+        <div>
+          <label class="text-sm font-semibold">Email</label>
+          <input name="email" type="email" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="Info@dashmobiledetailer.com" />
+        </div>
+        <div>
+          <label class="text-sm font-semibold">City</label>
+          <input name="city" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="Wilder / Caldwell / Nampa ..." />
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-sm font-semibold">Vehicle & Service</label>
+          <input required name="vehicle" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="e.g., 2019 Tacoma — Full Detail" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-sm font-semibold">Notes</label>
+          <textarea name="notes" rows="4" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="Any special concerns, pet hair, stains, etc."></textarea>
+        </div>
+        <div class="md:col-span-2 flex items-center justify-between gap-4">
+          <button class="btn btn-primary" type="submit">Request Booking</button>
+          <div class="text-sm muted">Or call/text <a class="link" href="tel:+15622012731">(562) 201‑2731</a></div>
+        </div>
+        <p id="formThanks" class="hidden md:col-span-2 text-green-300 bg-green-900/30 border border-green-700/40 p-3 rounded-xl">Thanks! Your request was sent. We'll confirm ASAP.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- MAP / CONTACT -->
+  <section id="contact" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-start">
+      <div class="card p-6">
+        <h2 class="text-3xl font-extrabold">Contact</h2>
+        <div class="mt-4 grid gap-2">
+          <div><span class="font-semibold">Phone:</span> <a class="link" href="tel:+15622012731">(562) 201‑2731</a></div>
+          <div><span class="font-semibold">Email:</span> <a class="link" href="mailto:Info@dashmobiledetailer.com">Info@dashmobiledetailer.com</a></div>
+          <div class="flex gap-4 mt-2">
+            <a class="link" target="_blank" href="https://www.instagram.com/dashsdetailing/">Instagram</a>
+            <a class="link" target="_blank" href="https://www.youtube.com/@Dash-detailing">YouTube</a>
+            <a class="link" target="_blank" href="https://www.facebook.com/profile.php?id=61579169787822">Facebook</a>
+          </div>
+        </div>
+      </div>
+      <div class="card overflow-hidden">
+        <iframe id="mapFrame" class="w-full h-[360px]" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 border-t border-white/10 bg-[#191c20]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold">FAQ</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="card p-6">
+          <div class="font-bold">Do you need water or power?</div>
+          <p class="muted mt-2">We’re fully mobile. We can use your water/power when available; otherwise we bring what’s needed for the job.</p>
+        </div>
+        <div class="card p-6">
+          <div class="font-bold">How long does a Full Detail take?</div>
+          <p class="muted mt-2">Typically 4–5 hours depending on size/condition. We’ll confirm when we see the vehicle.</p>
+        </div>
+        <div class="card p-6">
+          <div class="font-bold">What areas do you serve?</div>
+          <p class="muted mt-2">Wilder, Caldwell, Nampa, Meridian, Boise and surrounding Treasure Valley.</p>
+        </div>
+        <div class="card p-6">
+          <div class="font-bold">Are your products safe?</div>
+          <p class="muted mt-2">Yes — pro‑grade chemicals and methods safe for modern finishes (KCX, P&S, etc.).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-10 text-center">
+    <div class="text-sm muted">© <span id="year"></span> Dash Detailing • All rights reserved</div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    const $ = (s)=>document.querySelector(s);
+    // Services & Pricing grids
+    const sGrid = document.getElementById('servicesGrid');
+    const pGrid = document.getElementById('pricingGrid');
+    SITE.services.forEach(s=>{
+      const card = document.createElement('div');
+      card.className='card p-6 flex flex-col';
+      card.innerHTML = `
+        <div class="text-sm uppercase tracking-wide muted">Service</div>
+        <div class="mt-1 text-xl font-semibold">${s.name}</div>
+        <div class="mt-1 muted">${s.desc || ''}</div>
+        <div class="mt-4 flex items-center justify-between">
+          <div class="font-extrabold" style="color:var(--accent)">From $${s.price}</div>
+          <a class="btn btn-primary" href="#book">Book</a>
+        </div>`;
+      sGrid.appendChild(card);
+      pGrid.appendChild(card.cloneNode(true));
+    });
+
+    // Gallery
+    const gGrid = document.getElementById('galleryGrid');
+    SITE.gallery.forEach(src=>{
+      const a = document.createElement('a');
+      a.href = src; a.className = 'block group overflow-hidden card p-0';
+      a.innerHTML = `<img src="${src}" alt="Detail photo" class="aspect-square w-full object-cover group-hover:scale-105 transition-transform duration-300"/>`;
+      a.addEventListener('click', (e)=>{ e.preventDefault(); openLightbox(src); });
+      gGrid.appendChild(a);
+    });
+
+    // Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    function openLightbox(src){ lbImg.src = src; lb.classList.add('open'); }
+    document.getElementById('lightboxClose').addEventListener('click',()=>lb.classList.remove('open'));
+    lb.addEventListener('click',(e)=>{ if(e.target===lb) lb.classList.remove('open'); });
+
+    // Map
+    const q = encodeURIComponent(SITE.mapQuery || SITE.area);
+    document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${q}&output=embed`;
+
+    // Booking toggles
+    const calWrap = document.getElementById('calendarWrap');
+    const calFrame = document.getElementById('calendarFrame');
+    document.getElementById('btnCalendly').addEventListener('click', ()=>{ calFrame.src = SITE.calendly; calWrap.classList.remove('hidden'); document.getElementById('quoteForm').classList.add('hidden');});
+    document.getElementById('btnInline').addEventListener('click', ()=>{ calWrap.classList.add('hidden'); document.getElementById('quoteForm').classList.remove('hidden');});
+
+    // Mobile menu
+    document.getElementById('menuBtn').addEventListener('click',()=> document.getElementById('mobileMenu').classList.toggle('hidden'));
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

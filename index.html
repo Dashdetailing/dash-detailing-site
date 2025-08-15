@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dash Detailing — Mobile Auto Detailing</title>
+  <meta name="description" content="Premium mobile detailing in the Treasure Valley. Book online for interior & exterior details, paint correction, and ceramic coatings." />
+
+  <!-- Fonts & Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root{--bg:#1e1e1e;--panel:#22262c;--muted:#aab4c0;--text:#e6edf5;--accent:#5BC0F8}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:1rem;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.75rem 1.1rem;border-radius:.9rem;font-weight:700}
+    .btn-primary{background:var(--accent);color:#0b1220}
+    .btn-ghost{border:1px solid rgba(255,255,255,.12);color:var(--text)}
+    .muted{color:var(--muted)}
+    .link{color:var(--accent)}
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:50}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:90vw;max-height:85vh;border-radius:1rem}
+  </style>
+
+  <!-- Stackbit content loader -->
+  <script>
+    const loadJSON = (p) => fetch(p).then(r => { if(!r.ok) throw new Error('Failed '+p); return r.json(); });
+    const CONTENT = Promise.all([
+      loadJSON('/content/settings.json'),
+      loadJSON('/content/services.json'),
+      loadJSON('/content/pricing.json'),
+      loadJSON('/content/gallery.json'),
+      loadJSON('/content/pages/home.json')
+    ]).then(([SETTINGS, SERVICES, PRICING, GALLERY, HOME]) => ({ SETTINGS, SERVICES, PRICING, GALLERY, HOME }));
+  </script>
+</head>
+<body>
+  <!-- ================= NAV ================= -->
+  <header class="sticky top-0 z-40 border-b border-white/10 backdrop-blur bg-[#1e1e1e]/90">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-2xl" style="background:var(--accent)"></div>
+        <span id="brandName" class="font-extrabold text-xl">Dash Detailing</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 font-semibold">
+        <a class="link" href="#services">Services</a>
+        <a class="link" href="#pricing">Pricing</a>
+        <a class="link" href="#gallery">Gallery</a>
+        <a class="link" href="#contact">Contact</a>
+        <a class="link" href="/admin/">Admin</a>
+        <a class="btn btn-primary" href="#book">Book Now</a>
+      </nav>
+      <button id="menuBtn" class="md:hidden btn btn-ghost">Menu</button>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 grid gap-2 text-lg">
+        <a class="link" href="#services">Services</a>
+        <a class="link" href="#pricing">Pricing</a>
+        <a class="link" href="#gallery">Gallery</a>
+        <a class="link" href="#contact">Contact</a>
+        <a class="link" href="/admin/">Admin</a>
+        <a class="btn btn-primary w-max" href="#book">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="home" class="py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+          Luxury Mobile Detailing
+          <span class="block" style="color:var(--accent)">Right at Your Door</span>
+        </h1>
+        <p class="mt-5 text-lg muted" id="heroIntro">Serving the Treasure Valley. We restore interiors, perfect paint, and protect finishes.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a class="btn btn-primary" href="#book">Book Online</a>
+          <a id="heroCall" class="btn btn-ghost" href="#">Call</a>
+        </div>
+        <p class="mt-3 text-sm muted">Questions? <a id="emailLinkTop" class="link" href="#">Email</a></p>
+      </div>
+      <div id="heroHero" class="card p-0 aspect-[16/10] bg-center bg-cover"></div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="services" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between">
+        <h2 class="text-3xl font-extrabold">Services</h2>
+        <a class="btn btn-primary hidden sm:inline-flex" href="#book">Book</a>
+      </div>
+      <p class="mt-3 muted">Interior • Exterior • Paint Correction • Ceramic Coatings • Maintenance</p>
+      <div id="servicesGrid" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- ================= PRICING ================= -->
+  <section id="pricing" class="py-16 border-y border-white/10 bg-[#191c20]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold">Pricing</h2>
+      <p class="mt-2 muted">Starting prices shown. Final quote varies by size & condition.</p>
+
+      <div id="pricingGrid" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+      <div class="mt-12 grid gap-8">
+        <div class="card p-6 overflow-x-auto">
+          <h3 class="text-xl font-bold">Vehicle Size Upcharge — Full / Correction / Ceramic</h3>
+          <table class="mt-4 w-full text-left text-sm">
+            <thead class="muted">
+              <tr><th class="py-2 pr-4">Size</th><th class="py-2 pr-4">Examples</th><th class="py-2">Upcharge</th></tr>
+            </thead>
+            <tbody id="sizeUpchargeBody"></tbody>
+          </table>
+        </div>
+        <div class="card p-6 overflow-x-auto">
+          <h3 class="text-xl font-bold">Maintenance Detail — Size Upcharge</h3>
+          <table class="mt-4 w-full text-left text-sm">
+            <thead class="muted">
+              <tr><th class="py-2 pr-4">Size</th><th class="py-2 pr-4">Examples</th><th class="py-2">Upcharge</th></tr>
+            </thead>
+            <tbody id="maintUpchargeBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-12 card p-6">
+        <h3 class="text-xl font-bold">Add‑Ons</h3>
+        <ul id="addonsList" class="mt-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-2"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BOOKING ================= -->
+  <section id="book" class="py-16 border-b border-white/10 bg-[#191c20]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold">Book Your Detail</h2>
+      <p class="mt-2 muted">Pick the inline form or book directly with Calendly.</p>
+
+      <div class="mt-6 flex gap-3">
+        <button id="btnInline" class="btn btn-ghost">Inline Form</button>
+        <button id="btnCalendly" class="btn btn-primary">Calendly</button>
+      </div>
+
+      <div id="calendarWrap" class="mt-8 rounded-2xl overflow-hidden border border-white/10 card p-0 hidden">
+        <iframe id="calendarFrame" src="" class="w-full h-[70vh]" frameborder="0"></iframe>
+      </div>
+
+      <form id="quoteForm" name="quote" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="mt-8 grid gap-4 md:grid-cols-2 card p-6">
+        <input type="hidden" name="form-name" value="quote">
+        <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+        <div>
+          <label class="text-sm font-semibold">Name</label>
+          <input required name="name" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="Your name" />
+        </div>
+        <div>
+          <label class="text-sm font-semibold">Phone</label>
+          <input required name="phone" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="(562) 201-2731" />
+        </div>
+        <div>
+          <label class="text-sm font-semibold">Email</label>
+          <input name="email" type="email" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="Info@dashmobiledetailer.com" />
+        </div>
+        <div>
+          <label class="text-sm font-semibold">City</label>
+          <input name="city" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="Wilder / Caldwell / Nampa ..." />
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-sm font-semibold">Vehicle & Service</label>
+          <input required name="vehicle" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="e.g., 2019 Tacoma — Full Detail" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-sm font-semibold">Notes</label>
+          <textarea name="notes" rows="4" class="mt-1 w-full rounded-xl bg-transparent border border-white/15 px-3 py-2" placeholder="Any special concerns, pet hair, stains, etc."></textarea>
+        </div>
+        <div class="md:col-span-2 flex items-center justify-between gap-4">
+          <button class="btn btn-primary" type="submit">Request Booking</button>
+          <div class="text-sm muted">Or call/text <a id="bookPhone" class="link" href="#"></a></div>
+        </div>
+        <p id="formThanks" class="hidden md:col-span-2 text-green-300 bg-green-900/30 border border-green-700/40 p-3 rounded-xl">Thanks! Your request was sent. We'll confirm ASAP.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between">
+        <h2 class="text-3xl font-extrabold">Gallery</h2>
+        <a class="btn btn-primary hidden sm:inline-flex" href="#book">Get a Quote</a>
+      </div>
+      <p class="mt-2 muted">Tap any photo to enlarge.</p>
+      <div id="galleryGrid" class="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+    </div>
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+      <button id="lightboxClose" class="absolute top-6 right-6 text-3xl text-white">×</button>
+      <img id="lightboxImg" alt="Detail photo" />
+    </div>
+  </section>
+
+  <!-- ================= CONTACT & MAP ================= -->
+  <section id="contact" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-start">
+      <div class="card p-6">
+        <h2 class="text-3xl font-extrabold">Contact</h2>
+        <div class="mt-4 grid gap-2">
+          <div><span class="font-semibold">Phone:</span> <a id="contactPhone" class="link" href="#"></a></div>
+          <div><span class="font-semibold">Email:</span> <a id="contactEmail" class="link" href="#"></a></div>
+          <div class="flex gap-4 mt-2">
+            <a id="ig" class="link" target="_blank">Instagram</a>
+            <a id="yt" class="link" target="_blank">YouTube</a>
+            <a id="fb" class="link" target="_blank">Facebook</a>
+          </div>
+        </div>
+      </div>
+      <div class="card overflow-hidden">
+        <iframe id="mapFrame" class="w-full h-[360px]" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-10 text-center">
+    <div class="text-sm muted">© <span id="year"></span> Dash Detailing • All rights reserved</div>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script>
+    const $ = (s)=>document.querySelector(s);
+
+    CONTENT.then(({SETTINGS, SERVICES, PRICING, GALLERY, HOME})=>{
+      // Theme
+      if(SETTINGS.theme){
+        const r=document.documentElement;
+        r.style.setProperty('--bg', SETTINGS.theme.bg||'#1e1e1e');
+        r.style.setProperty('--panel', SETTINGS.theme.panel||'#22262c');
+        r.style.setProperty('--text', SETTINGS.theme.text||'#e6edf5');
+        r.style.setProperty('--muted', SETTINGS.theme.muted||'#aab4c0');
+        r.style.setProperty('--accent', SETTINGS.theme.accent||'#5BC0F8');
+      }
+
+      // Brand & basics
+      $('#brandName').textContent = SETTINGS.siteName || 'Dash Detailing';
+      if($('#heroIntro') && HOME.intro){ $('#heroIntro').textContent = HOME.intro; }
+
+      const phoneDigits = (SETTINGS.phone||'').replace(/[^\d+]/g,'');
+      const phoneText = SETTINGS.phone || '';
+      if($('#heroCall')){ $('#heroCall').href = 'tel:'+phoneDigits; $('#heroCall').textContent = 'Call '+phoneText; }
+      if($('#bookPhone')){ $('#bookPhone').href='tel:'+phoneDigits; $('#bookPhone').textContent = phoneText; }
+      if($('#contactPhone')){ $('#contactPhone').href='tel:'+phoneDigits; $('#contactPhone').textContent = phoneText; }
+      if($('#emailLinkTop')){ $('#emailLinkTop').href='mailto:'+(SETTINGS.email||''); $('#emailLinkTop').textContent = SETTINGS.email||''; }
+      if($('#contactEmail')){ $('#contactEmail').href='mailto:'+(SETTINGS.email||''); $('#contactEmail').textContent = SETTINGS.email||''; }
+
+      // Socials
+      if(SETTINGS.socials){ if(SETTINGS.socials.instagram) $('#ig').href = SETTINGS.socials.instagram; if(SETTINGS.socials.youtube) $('#yt').href = SETTINGS.socials.youtube; if(SETTINGS.socials.facebook) $('#fb').href = SETTINGS.socials.facebook; }
+
+      // Hero text & image
+      const h1 = document.querySelector('#home h1');
+      if(HOME.heroHeading && h1){ h1.childNodes[0].nodeValue = HOME.heroHeading + '\n'; }
+      const hSub = document.querySelector('#home h1 span.block');
+      if(HOME.heroSub && hSub){ hSub.textContent = HOME.heroSub; }
+      const heroDiv = document.getElementById('heroHero');
+      const heroImg = HOME.heroImage || (GALLERY.images && GALLERY.images[0]);
+      if(heroDiv && heroImg){ heroDiv.style.backgroundImage = `url(${heroImg})`; }
+
+      // Map & Calendly
+      const map = document.getElementById('mapFrame');
+      if(map) map.src = 'https://www.google.com/maps?q=' + encodeURIComponent(SETTINGS.mapQuery || SETTINGS.serviceArea || '') + '&output=embed';
+      const cal = document.getElementById('calendarFrame');
+      if(cal && SETTINGS.calendly){ cal.src = SETTINGS.calendly; }
+
+      // Services & Pricing cards
+      const sGrid = document.getElementById('servicesGrid');
+      const pGrid = document.getElementById('pricingGrid');
+      sGrid.innerHTML=''; pGrid.innerHTML='';
+      (SERVICES.items||[]).forEach(s=>{
+        const card = document.createElement('div');
+        card.className='card p-6 flex flex-col';
+        card.innerHTML = `
+          <div class="text-sm uppercase tracking-wide muted">Service</div>
+          <div class="mt-1 text-xl font-semibold">${s.name}</div>
+          <div class="mt-1 muted">${s.desc||''}</div>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="font-extrabold" style="color:var(--accent)">From $${s.price}</div>
+            <a class="btn btn-primary" href="#book">Book</a>
+          </div>`;
+        sGrid.appendChild(card);
+        pGrid.appendChild(card.cloneNode(true));
+      });
+
+      // Add‑ons
+      const addonsList = document.getElementById('addonsList');
+      if(addonsList){ addonsList.innerHTML=''; (PRICING.addons||[]).forEach(a=>{ const li=document.createElement('li'); li.innerHTML = `${a.label} — <strong>${a.price}</strong>`; addonsList.appendChild(li); }); }
+
+      // Upcharges
+      const sizeBody = document.getElementById('sizeUpchargeBody');
+      if(sizeBody){ sizeBody.innerHTML=''; (PRICING.sizeUpcharge||[]).forEach(row=>{ const tr=document.createElement('tr'); tr.innerHTML = `<td class="py-2 pr-4">${row.size}</td><td class="py-2 pr-4">${row.examples||''}</td><td class="py-2">${row.upcharge}</td>`; sizeBody.appendChild(tr); }); }
+      const maintBody = document.getElementById('maintUpchargeBody');
+      if(maintBody){ maintBody.innerHTML=''; (PRICING.maintenanceUpcharge||[]).forEach(row=>{ const tr=document.createElement('tr'); tr.innerHTML = `<td class="py-2 pr-4">${row.size}</td><td class="py-2 pr-4">${row.examples||''}</td><td class="py-2">${row.upcharge}</td>`; maintBody.appendChild(tr); }); }
+
+      // Gallery
+      const gGrid = document.getElementById('galleryGrid');
+      if(gGrid){ gGrid.innerHTML=''; (GALLERY.images||[]).forEach(src=>{ const a=document.createElement('a'); a.href=src; a.className='block group overflow-hidden card p-0'; a.innerHTML = `<img src="${src}" alt="Detail photo" class="aspect-square w-full object-cover group-hover:scale-105 transition-transform duration-300"/>`; a.addEventListener('click', (e)=>{ e.preventDefault(); openLightbox(src); }); gGrid.appendChild(a); }); }
+    }).catch(err=>{ console.error('Content load error:', err); });
+
+    // Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    function openLightbox(src){ lbImg.src = src; lb.classList.add('open'); }
+    document.getElementById('lightboxClose').addEventListener('click',()=>lb.classList.remove('open'));
+    lb.addEventListener('click',(e)=>{ if(e.target===lb) lb.classList.remove('open'); });
+
+    // Booking toggles
+    const calWrap = document.getElementById('calendarWrap');
+    document.getElementById('btnCalendly').addEventListener('click', ()=>{ if(calWrap){ calWrap.classList.remove('hidden'); document.getElementById('quoteForm').classList.add('hidden'); } });
+    document.getElementById('btnInline').addEventListener('click',  ()=>{ if(calWrap){ calWrap.classList.add('hidden'); document.getElementById('quoteForm').classList.remove('hidden'); } });
+
+    // Mobile menu + footer year
+    document.getElementById('menuBtn').addEventListener('click',()=> document.getElementById('mobileMenu').classList.toggle('hidden'));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
